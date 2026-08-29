@@ -1,33 +1,59 @@
 package selecaodireta;
 
 public class InsercaoDireta {
+	int[] vetor;
+	int nElem;
 
-	    int[] vetor;
-	    int nElem;
+	long comparacoes;
+	long movimentacoes;
+	long tempo;
 
-	    public InsercaoDireta(int[] vetor) {
-	        this.vetor = vetor;
-	        this.nElem = vetor.length;
-	    }
+	public InsercaoDireta(int[] vetor) {
+		this.vetor = vetor;
+		this.nElem = vetor.length;
+	}
 
-	    public void insercaoDireta() {
+	public void insercaoDireta() {
+		int i, j;
+		int temp;
 
-	        int i, j;
-	        int temp;
+		comparacoes = 0;
+		movimentacoes = 0;
 
-	        for (i = 1; i < this.nElem; i++) {
+		long inicio = System.nanoTime();
 
-	            temp = this.vetor[i];
-	            j = i - 1;
+		for (i = 1; i < this.nElem; i++) {
+			temp = this.vetor[i];
+			movimentacoes ++;
+			j = i - 1;
 
-	            while ((j >= 0) && (this.vetor[j] > temp)) {
+			while (j >= 0) {
+				comparacoes ++;
 
-	                this.vetor[j + 1] = this.vetor[j];
-	                j--;
-	            }
+				if(this.vetor[j]>temp) {
+					this.vetor[j+1] = this.vetor[j];
+					movimentacoes++;
+					j--;
+				}else {
+					break;
+				}
+			}
+			this.vetor[j+1] = temp;
+			movimentacoes++;
+		}
+		long fim = System.nanoTime();
+		tempo = fim-inicio;
+	}
+	public long getComparacoes() {
+		return comparacoes; 
+	}
 
-	            this.vetor[j + 1] = temp;
-	        }
-	    }
+	public long getMovimentacoes() {
+		return movimentacoes;
+	}
+	
+	public long getTempo() {
+		return tempo;
+	}
 
 }
