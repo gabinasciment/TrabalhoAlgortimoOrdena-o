@@ -3,132 +3,180 @@ package selecaodireta;
 import java.util.Scanner;
 
 public class Main {
+	static Scanner scan = new Scanner(System.in);
 
-    static Scanner scan = new Scanner(System.in);
+	public static void main(String[] args) {
 
-    public static void main(String[] args) {
+		Vetor original = carregarArquivo();
 
-        Vetor original = carregarArquivo();
+		int opcao;
 
-        int opcao;
+		do {
 
-        do {
+			opcao = menu();
 
-            opcao = menu();
+			switch (opcao) {
 
-            switch (opcao) {
+			case 1:
+				executarHeapSort(original);
+				break;
 
-                case 1:
-                    executarHeapSort(original);
-                    break;
+			case 2:
+				executarQuickSort(original);
+				break;
 
-                case 2:
-                    executarQuickSort(original);
-                    break;
+			case 3:
+				executarBubbleSort(original);
+				break;
 
-                case 3:
-                    executarBubbleSort(original);
-                    break;
+			case 4:
+				executarSelecaoDireta(original);
+				break;
 
-                case 4:
-                    executarSelecaoDireta(original);
-                    break;
+			case 5:
+				executarInsercaoDireta(original);
+				break;
 
-                case 5:
-                    executarInsercaoDireta(original);
-                    break;
+			case 6:
+				executarShellSort(original);
+				break;
 
-                case 6:
-                    executarShellSort(original);
-                    break;
+			case 7:
+				executarShakerSort(original);
+				break;
 
-                case 7:
-                    executarShakerSort(original);
-                    break;
+			case 0:
+				System.out.println("Programa encerrado.");
+				break;
 
-                case 0:
-                    System.out.println("Programa encerrado.");
-                    break;
+			default:
+				System.out.println("Opção inválida.");
+			}
 
-                default:
-                    System.out.println("Opção inválida.");
-            }
+		} while (opcao != 0);
 
-        } while (opcao != 0);
+		scan.close();
+	}
 
-        scan.close();
-    }
-    
-    
-    public static int menu() {
 
-        System.out.println("\n========== MENU ==========");
-        System.out.println("1 - HeapSort");
-        System.out.println("2 - QuickSort");
-        System.out.println("3 - BubbleSort");
-        System.out.println("4 - Seleção Direta");
-        System.out.println("5 - Inserção Direta");
-        System.out.println("6 - ShellSort");
-        System.out.println("7 - ShakerSort");
-        System.out.println("0 - Sair");
-        System.out.print("Escolha uma opção: ");
+	public static int menu() {
 
-        return scan.nextInt();
-    }
-    
-    public static void executarHeapSort(Vetor original) {
+		System.out.println("\n========== MENU ==========");
+		System.out.println("1 - HeapSort");
+		System.out.println("2 - QuickSort");
+		System.out.println("3 - BubbleSort");
+		System.out.println("4 - Seleção Direta");
+		System.out.println("5 - Inserção Direta");
+		System.out.println("6 - ShellSort");
+		System.out.println("7 - ShakerSort");
+		System.out.println("0 - Sair");
+		System.out.print("Escolha uma opção: ");
 
-        Vetor copia = original.copiar();
+		return scan.nextInt();
+	}
 
-        copia.heapSort();
+	public static void executarHeapSort(Vetor original) {
 
-        System.out.println("\n===== HEAPSORT =====");
+		Vetor copia = original.copiar();
 
-        System.out.println("Comparações: "
-                + copia.getComparacoes());
+		copia.heapSort();
 
-        System.out.println("Movimentações: "
-                + copia.getMovimentacoes());
+		System.out.println("\n===== HEAPSORT =====");
 
-        System.out.println("Tempo: "
-                + copia.getTempo() + " ns");
+		System.out.println("Comparações: "
+				+ copia.getComparacoes());
 
-        System.out.println("Tempo: "
-                + (copia.getTempo() / 1_000_000.0) + " ms");
-    }
-    
-    public static void executarShellSort(Vetor original) {
+		System.out.println("Movimentações: "
+				+ copia.getMovimentacoes());
 
-        Vetor copia = original.copiar();
+		System.out.println("Tempo: "
+				+ copia.getTempo() + " ns");
 
-       
-        copia.shellSort();
+		System.out.println("Tempo: "
+				+ (copia.getTempo() / 1_000_000.0) + " ms");
+	}
 
-       
-        System.out.println("\n===== SHELLSORT =====");
+	public static void executarShellSort(Vetor original) {
 
-        System.out.println("Vetor ordenado:");
+		Vetor copia = original.copiar();
 
-        for (int i = 0; i < copia.getNElem(); i++) {
-            System.out.print(copia.getVetor()[i] + " ");
-        }
 
-        System.out.println();
+		copia.shellSort();
 
-        
-        System.out.println("\nComparações: "
-                + copia.getComparacoes());
 
-        System.out.println("Movimentações: "
-                + copia.getMovimentacoes());
+		System.out.println("\n===== SHELLSORT =====");
 
-        System.out.println("Tempo: "
-                + copia.getTempo() + " ns");
+		System.out.println("Vetor ordenado:");
 
-        System.out.println("Tempo: "
-                + copia.getTempo() / 1_000_000.0 + " ms");
-    }
-    
-    
-    
+		for (int i = 0; i < copia.getNElem(); i++) {
+			System.out.print(copia.getVetor()[i] + " ");
+		}
+
+		System.out.println();
+
+
+		System.out.println("\nComparações: "
+				+ copia.getComparacoes());
+
+		System.out.println("Movimentações: "
+				+ copia.getMovimentacoes());
+
+		System.out.println("Tempo: "
+				+ copia.getTempo() + " ns");
+
+		System.out.println("Tempo: "
+				+ copia.getTempo() / 1_000_000.0 + " ms");
+	}
+
+
+	public static void executarInsercaoDireta(Vetor original) {
+		Vetor copia = original.copiar();
+
+		InsercaoDireta insercao =
+				new InsercaoDireta(copia.getVetor());
+
+		insercao.insercaoDireta();
+
+		System.out.println("\n===== INSERÇÃO DIRETA =====");
+
+		System.out.println("Comparações: "
+				+ insercao.getComparacoes());
+
+		System.out.println("Movimentações: "
+				+ insercao.getMovimentacoes());
+
+		System.out.println("Tempo: "
+				+ insercao.getTempo() + " ns");
+
+		System.out.println("Tempo: "
+				+ (insercao.getTempo() / 1_000_000.0) + " ms");
+
+	}
+
+public static void executarSelecaoDireta(Vetor original) {
+
+	Vetor copia = original.copiar();
+
+	SelecaoDireta selecao =
+			new SelecaoDireta(copia.getVetor());
+
+	selecao.selecaoDireta();
+
+	System.out.println("\n===== SELEÇÃO DIRETA =====");
+
+	System.out.println("Comparações: "
+			+ selecao.getComparacoes());
+
+	System.out.println("Movimentações: "
+			+ selecao.getMovimentacoes());
+
+	System.out.println("Tempo: "
+			+ selecao.getTempo() + " ns");
+
+	System.out.println("Tempo: "
+			+ (selecao.getTempo() / 1_000_000.0) + " ms");
+
+}
+
+
 }
